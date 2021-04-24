@@ -1,0 +1,49 @@
+n = int(input())
+dic1 = {}
+for _ in range(n):
+    key = input()
+    value = int(input())
+    dic1[key] = value
+k = int(input())
+dic = dict(sorted(dic1.items(), key=lambda item: item[1]))
+arr = list(dic.values())
+
+def minDiff(arr,n,k):
+    result = +2147483647
+   
+    
+   
+    # Find minimum value among
+    # all K size subarray.
+    for i in range(n-k+1):
+        result = int(min(result, arr[i+k-1] - arr[i]))
+   
+    return result
+def findPair(arr,n):
+  
+    size = len(arr)
+  
+    # Initialize positions of two elements
+    i,j = 0,1
+  
+    # Search for a pair
+    while i < size and j < size:
+  
+        if i != j and arr[j]-arr[i] == n:
+            
+            return list((arr[i],arr[j]))
+  
+        elif arr[j] - arr[i] < n:
+            j+=1
+        else:
+            i+=1
+lst1 = findPair(arr,minDiff(arr,n,k))
+res = dict()
+i,j = lst1[0],lst1[1]
+for key, val in dic.items():
+    if int(val) >= i and int(val) <= j:
+        res[key] = val
+print('No of employees : ',k)
+print('Here the goodies that are selected for distribution are:')
+for keys in res:
+    print('{} : {}'.format(keys,res[keys]))
